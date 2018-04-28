@@ -8,12 +8,8 @@ temp=np.arange(number_of_sample).reshape(1,number_of_sample)
 train_X_origin=temp+np.random.random((1,number_of_sample))
 train_Y_origin=3*temp+6+np.random.random((1,number_of_sample))
 
-#归一化或者标准化
+#归一化
 temp=np.vstack([train_X_origin,train_Y_origin])
-#mu=np.mean(temp)
-#sigma=np.std(temp)
-#train_X=(train_X_origin-mu)/sigma
-#train_Y=(train_Y_origin-mu)/sigma
 maxx=np.max(temp)
 minn=np.min(temp)
 alp=maxx-minn
@@ -47,8 +43,6 @@ with tf.Session() as sess:
             print('iteration:','%04d'%i,'loss:','{:.9f}'.format(temp), \
                   'w=',sess.run(w),'b=',alp*sess.run(b)+minn+minn*(1-sess.run(w)))#反归一化
     plt.plot(train_X_origin,train_Y_origin,'ro')
-    #plt.plot(train_X, train_Y, 'ro')
-    #plt.plot(train_X_origin.T,sess.run(w)*train_X_origin.T+sess.run(b))
     plt.plot(train_X_origin.T, sess.run(w) * train_X_origin.T + alp*sess.run(b)+minn+minn*(1-sess.run(w)))
     plt.show()
 
