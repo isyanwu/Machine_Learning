@@ -19,7 +19,9 @@ optimizer=tf.train.GradientDescentOptimizer(descent_rate).minimize(cross_entropy
 init=tf.global_variables_initializer()
 
 #评估模型
-correct_prediction = tf.equal(tf.argmax(Y, 1), tf.argmax(Y_prediction, 1))
+##tf.argmax(input,axis),axis=1返回input每行的最大值所对应的索引值，axis则是列
+correct_prediction = tf.equal(tf.argmax(Y, axis=1), tf.argmax(Y_prediction, axis=1))
+#tf.cast(input, dtype) 强制类型转化，
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 #train
