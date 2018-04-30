@@ -4,8 +4,7 @@ import input_data
 mnist=input_data.read_data_sets('MNIST_data/',one_hot=True)
 
 #参数
-descent_rate=0.01
-max_iteration=10000
+max_iteration=1000
 
 #训练样本，列代表特征，行代表样本
 x=tf.placeholder(tf.float32,[None,784])
