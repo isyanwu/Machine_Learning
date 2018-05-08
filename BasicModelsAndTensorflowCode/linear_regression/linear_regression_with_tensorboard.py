@@ -2,12 +2,13 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 
-#
+#生成训练数据
 number_of_sample=50
 temp=np.arange(number_of_sample).reshape(1,number_of_sample)
 train_X_origin=temp+np.random.random((1,number_of_sample))
 train_Y_origin=3*temp+6+np.random.random((1,number_of_sample))
 
+#归一化
 temp=np.vstack([train_X_origin,train_Y_origin])
 mu=np.mean(temp)
 sigma=np.std(temp)
@@ -20,7 +21,7 @@ train_X=(train_X_origin-minn)/(maxx-minn)
 train_Y=(train_Y_origin-minn)/(maxx-minn)
 
 
-#parameter
+#初始化参数
 descent_rate=0.1
 max_iteration=2000
 
