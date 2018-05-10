@@ -49,5 +49,7 @@ def prepare_test_set():
         name = fileNameList[i]
         shutil.move(CAPTCHA_IMAGE_PATH + name, TEST_IMAGE_PATH + name)
 
-generate_captcha_image()
+generate_captcha_image(CHAR_SET, CHAR_SET_LEN, CAPTCHA_IMAGE_PATH)
 prepare_test_set()
+sys.stdout.write("\nFinished")
+sys.stdout.flush()
