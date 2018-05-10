@@ -57,3 +57,21 @@ def get_data_and_label(fileName, filePath=CAPTCHA_IMAGE_PATH):
     image_label = name2label(fileName[0:CAPTCHA_LEN])
     return image_data, image_label
 
+# 生成一个训练batch
+def get_next_batch(batchSize=32, trainOrTest='train', step=0):
+    batch_data = np.zeros([batchSize, CAPTCHA_IMAGE_WIDHT * CAPTCHA_IMAGE_HEIGHT])
+    batch_label = np.zeros([batchSize, CAPTCHA_LEN * CHAR_SET_LEN])
+    fileNameList = TRAINING_IMAGE_NAME
+    if trainOrTest == 'validate':
+        fileNameList = VALIDATION_IMAGE_NAME
+
+    totalNumber = len(fileNameList)
+    indexStart = step * batchSize
+    for i in range(batchSize):
+        index = (i + indexStart) % totalNumber
+        name = fileNameList[index]
+        img_data, img_label = get_data_and_label(name)
+        batch_data[i, :] = img_data
+        batch_label[i, :] = img_label
+
+    return batch_data, batch_label
