@@ -164,3 +164,14 @@ def train_data_with_CNN():
                     break
             steps += 1
       
+image_filename_list, total = get_image_file_name(CAPTCHA_IMAGE_PATH)
+random.seed(time.time())
+#打乱顺序
+random.shuffle(image_filename_list)
+trainImageNumber = int(total * TRAIN_IMAGE_PERCENT)
+#分成测试集
+TRAINING_IMAGE_NAME = image_filename_list[ : trainImageNumber]
+#和验证集
+VALIDATION_IMAGE_NAME = image_filename_list[trainImageNumber : ]
+train_data_with_CNN()
+print('Training finished')
